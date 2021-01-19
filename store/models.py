@@ -39,10 +39,10 @@ class Order(models.Model):
 	def __str__(self):
 		return str(self.id)
 
-	@property
+	@property                    #this the function getting the total bill amount 
 	def get_cart_total(self):
-		orderitems = self.orderitem_set.all()
-		total = sum([item.get_total for item in orderitems])
+		orderitems = self.orderitem_set.all()   #this object give all iterms own by the order 
+		total = sum([item.get_total for item in orderitems])   #this is calculating all iterms total through the loop 
 		return total 
 
 	@property
