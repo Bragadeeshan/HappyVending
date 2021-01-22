@@ -20,6 +20,7 @@ class Product(models.Model):
 	price = models.FloatField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
+	available = models.IntegerField(default=0, null=True, blank=True)
 
 	def __str__(self):
 		return self.name
@@ -43,7 +44,6 @@ class Order(models.Model):
 	date_ordered = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False)
 	transaction_id = models.CharField(max_length=100, null=True)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
 	status = models.CharField(max_length=200, null=True, choices=STATUS)
 
 	def __str__(self):
