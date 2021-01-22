@@ -7,6 +7,9 @@ class Customer(models.Model):
 	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 	name = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200)
+	phone = models.CharField(max_length=200, null=True)
+	profile_pic= models.ImageField(default= "profile1.png"	,null=True,blank=True)
+
 
 	def __str__(self):
 		return self.name
@@ -31,10 +34,17 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+	STATUS = (
+			('Pending', 'Pending'),
+			 
+			('Delivered', 'Delivered'),
+			)
 	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 	date_ordered = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False)
 	transaction_id = models.CharField(max_length=100, null=True)
+	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	status = models.CharField(max_length=200, null=True, choices=STATUS)
 
 	def __str__(self):
 		return str(self.id)
